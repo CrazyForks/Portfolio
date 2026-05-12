@@ -6,29 +6,7 @@ import { socials } from "@/data/socials";
 import SocialIcon from "./SocialIcon";
 import { motion } from "framer-motion";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.1,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 20, filter: "blur(4px)" },
-  visible: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: {
-      duration: 0.4,
-      ease: [0.21, 0.47, 0.32, 0.98] as const,
-    },
-  },
-};
+import { containerVariants, itemVariants } from "@/lib/motionVariants";
 
 const Hero = () => {
   return (

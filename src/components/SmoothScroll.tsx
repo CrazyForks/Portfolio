@@ -8,7 +8,10 @@ export default function SmoothScroll({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    const lenis = new Lenis();
+    const lenis = new Lenis({
+      lerp: 0.15,
+      wheelMultiplier: 1.2,
+    });
 
     function raf(time: number) {
       lenis.raf(time);

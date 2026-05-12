@@ -122,35 +122,41 @@ export function DotPattern({
           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
         </radialGradient>
       </defs>
-      {dots.map((dot) => (
-        <motion.circle
-          key={`${dot.x}-${dot.y}`}
-          cx={dot.x}
-          cy={dot.y}
-          r={cr}
-          fill={glow ? `url(#${id}-gradient)` : "currentColor"}
-          initial={glow ? { opacity: 0.4, scale: 1 } : {}}
-          animate={
-            glow
-              ? {
-                  opacity: [0.4, 1, 0.4],
-                  scale: [1, 1.5, 1],
-                }
-              : {}
-          }
-          transition={
-            glow
-              ? {
-                  duration: dot.duration,
-                  repeat: Infinity,
-                  repeatType: "reverse",
-                  delay: dot.delay,
-                  ease: "easeInOut",
-                }
-              : {}
-          }
-        />
-      ))}
+      {dots.map((dot) => {
+        if (!glow) {
+          return (
+            <circle
+              key={`${dot.x}-${dot.y}`}
+              cx={dot.x}
+              cy={dot.y}
+              r={cr}
+              fill="currentColor"
+            />
+          );
+        }
+
+        return (
+          <motion.circle
+            key={`${dot.x}-${dot.y}`}
+            cx={dot.x}
+            cy={dot.y}
+            r={cr}
+            fill={`url(#${id}-gradient)`}
+            initial={{ opacity: 0.4, scale: 1 }}
+            animate={{
+              opacity: [0.4, 1, 0.4],
+              scale: [1, 1.5, 1],
+            }}
+            transition={{
+              duration: dot.duration,
+              repeat: Infinity,
+              repeatType: "reverse",
+              delay: dot.delay,
+              ease: "easeInOut",
+            }}
+          />
+        );
+      })}
     </svg>
   )
 }

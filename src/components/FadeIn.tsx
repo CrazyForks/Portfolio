@@ -1,4 +1,5 @@
 import { motion, type HTMLMotionProps } from "framer-motion";
+import { fadeInUp } from "@/lib/motionVariants";
 
 interface FadeInProps extends HTMLMotionProps<"div"> {
   delay?: number;
@@ -9,17 +10,35 @@ interface FadeInProps extends HTMLMotionProps<"div"> {
 export function FadeIn({
   children,
   delay = 0,
-  duration = 0.6,
-  yOffset = 24,
+  duration,
+  yOffset,
   className,
   ...props
 }: FadeInProps) {
+  // We can merge custom props if needed, but for now we'll just use the standard fadeInUp variants
+  // and pass the delay via transition if a custom delay is provided.
+  const customVariants = {
+    ...fadeInUp,
+    visible: {
+      ...fadeInUp.visible,
+      transition: {
+        ...(fadeInUp.visible as any).transition,
+        ...(delay ? { delay } : {}),
+        ...(duration ? { duration } : {}),
+      },
+    },
+    hidden: {
+      ...fadeInUp.hidden,
+      ...(yOffset !== undefined ? { y: yOffset } : {}),
+    },
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: yOffset }}
-      whileInView={{ opacity: 1, y: 0 }}
+      variants={customVariants as any}
+      initial="hidden"
+      whileInView="visible"
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       className={className}
       {...props}
     >
