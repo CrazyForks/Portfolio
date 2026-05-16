@@ -1,6 +1,7 @@
 import { quotes } from "@/data/quote";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { MusicPlayer } from "./MusicPlayer";
 
 const QuoteSection = () => {
   const [index, setIndex] = useState(0);
@@ -17,18 +18,19 @@ const QuoteSection = () => {
   return (
     <>
       <style>{`@import url('https://fonts.googleapis.com/css2?family=Lora:ital@0;1&display=swap');`}</style>
+
       {/* Separator */}
-      <div className="flex items-center justify-center gap-3 px-10">
-        <span className="flex-1 h-px bg-border" />
+      <div className="flex items-center justify-center gap-3 px-6 mt-8">
+        <span className="flex-1 h-px bg-border/60" />
         <span className="text-muted-foreground text-base leading-none translate-y-">
           &#9672;
         </span>
-        <span className="flex-1 h-px bg-border" />
+        <span className="flex-1 h-px bg-border/60" />
       </div>
 
-      <section className="flex pt-16 pb-10 items-center justify-center px-6">
-        {/* Fixed height container prevents layout shift between quotes of different lengths */}
-        <div className="w-full max-w-xl min-h-[7rem] flex items-center justify-center">
+      <section className="flex flex-col pt-12 px-6 gap-2 items-center">
+        {/* Quote Container */}
+        <div className="w-full max-w-xl mx-auto min-h-24 flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
@@ -58,6 +60,9 @@ const QuoteSection = () => {
             </motion.div>
           </AnimatePresence>
         </div>
+
+        {/* Music Player */}
+        <MusicPlayer />
       </section>
     </>
   );
