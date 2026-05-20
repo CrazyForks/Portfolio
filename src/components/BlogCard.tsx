@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const BlogCard = ({ title, description, tags, date, readTime }: Blog) => {
   return (
-    <div className="flex flex-col gap-3 bg-card border border-dashed border-border/80 p-4 sm:p-5 rounded-xl w-full overflow-hidden transition-colors hover:border-foreground/30">
+    <div className="flex flex-col gap-3 bg-card border border-dashed border-border/80 p-4 sm:p-5 rounded-xl w-full overflow-hidden">
       <div className="flex items-center justify-between">
         <div className="font-mono text-[10px] sm:text-xs tracking-widest text-muted-foreground uppercase">
           {new Date(date).toLocaleDateString("en-US", {
