@@ -114,7 +114,7 @@ const Stats = ({ year: initialYear = 2026 }: StatsProps) => {
       active = false;
       controller.abort();
     };
-  }, [year]);
+  }, [year, currentYear]);
 
   return (
     <section id="stats" className="w-full space-y-3">

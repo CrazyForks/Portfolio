@@ -11,7 +11,7 @@ import { containerVariants, itemVariants } from "@/lib/motionVariants";
 const Hero = () => {
   return (
     <section
-      className="flex flex-col justify-center pt-32 pb-20 sm:pt-20 sm:pb-12"
+      className="flex flex-col justify-center pt-32 pb-20 sm:pt-22 sm:pb-12"
  
       id="home"
     >
