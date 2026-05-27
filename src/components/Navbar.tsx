@@ -109,7 +109,7 @@ const Navbar = () => {
         <div className="flex flex-col gap-1">
           {navItems.map(({ href, label }) => {
             const isActive = location.pathname.startsWith(href);
-            const itemClass = `rounded-md px-3 py-2.5 text-base font-medium transition-colors ${
+            const itemClass = `rounded-md px-3 py-2.5 text-base font-light tracking-tight transition-colors ${
               isActive
                 ? "bg-accent/60 text-foreground"
                 : "text-muted-foreground hover:text-foreground hover:bg-accent/30"
@@ -130,7 +130,7 @@ const Navbar = () => {
         <div className="h-px w-full bg-border/80" aria-hidden="true" />
 
         <div className="flex items-center justify-between px-1">
-          <span className="text-base font-medium text-muted-foreground">
+          <span className="text-base font-light tracking-tight text-muted-foreground">
             Theme
           </span>
           <Tabs
