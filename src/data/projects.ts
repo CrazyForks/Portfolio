@@ -14,31 +14,36 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    name: "SuperTodo",
-    imgSrc: "/projects/supertodo.png",
+    name: "Shrtn",
+    imgSrc: "/projects/shrtn.png",
     description:
-      "A full-featured todo app with priorities, due dates, subtasks, and date-grouped views. Animated with Framer Motion and styled with shadcn/ui for a polished experience.",
+      "Shorten your links, track every click. See who's visiting — by browser, OS, and date. Built for speed with Redis-backed redirects.",
     about:
-      "A personal productivity app built to go beyond a basic todo list. It supports subtasks, priority levels, due dates, and groups tasks by date for a cleaner overview. Built with React, shadcn/ui, and Framer Motion, with a heavy focus on animations and a polished user experience.",
+      "A full-stack URL shortening service built for real deployment. Paste a long URL, get a short link at shrtn.fun. Behind the scenes, every redirect hits Redis first — falling back to PostgreSQL only on a cache miss. Click analytics track browser, OS, and date breakdowns per link. Auth is stateless JWT with full OTP email verification and forgot/reset password flow via Resend.",
     features: [
-      "Create, edit, and delete tasks with subtask support and completion tracking",
-      "Priority levels (High, Medium, Low) with visual indicators",
-      "Due date picker with date-grouped task views",
-      "Filter by All, Pending, and Completed — sort by status, priority, or date",
-      "Smooth Framer Motion animations on task add, complete, and delete",
-      "Dark and light theme toggle with persistent preference",
-      "Data persisted via localStorage — survives page refresh",
+      "Base62 short code generation from PostgreSQL auto-increment IDs — no collisions, no randomness needed",
+      "Redis cache-aside on redirect path — zero DB queries on cache hit, 24h TTL",
+      "Click analytics per link: Browser breakdown, OS breakdown, click timeline, last 5 clicks",
+      "JWT authentication with OTP email verification via Resend (noreply@shrtn.fun)",
+      "Enable/disable toggle per link with immediate Redis cache eviction",
+      "25 URLs per user, 30-day auto-expiry, grouped click counts in a single JPQL query",
+      "User-Agent parsing via uap-java — browser and OS extracted at write time, aggregated at read time",
+      "Analytics responses cached in Redis and evicted on every new click — always fresh without polling",
+      "Deployed across Render (Docker) and Vercel with custom domain shrtn.fun",
     ],
     techStack: [
       projectTech.react,
-      projectTech.javascript,
+      projectTech.typescript,
       projectTech.tailwindcss,
-      projectTech.vite,
-      projectTech.motion,
       projectTech.shadcnui,
+      projectTech.springboot,
+      projectTech.postgresql,
+      projectTech.redis,
+      projectTech.jwt,
+      projectTech.docker,
     ],
-    liveLink: "https://supertodo-v1.netlify.app/",
-    githubLink: "https://github.com/CharanMunur/supertodo",
+    liveLink: "https://app.shrtn.fun",
+    githubLink: "https://github.com/CharanMunur/shrtn",
   },
   {
     name: "Markdown Editor",
@@ -91,6 +96,33 @@ export const projects: Project[] = [
     ],
     liveLink: "https://www.npmjs.com/package/shadcn-scaffold",
     githubLink: "https://github.com/CharanMunur/shadcn-scaffold",
+  },
+  {
+    name: "SuperTodo",
+    imgSrc: "/projects/supertodo.png",
+    description:
+      "A full-featured todo app with priorities, due dates, subtasks, and date-grouped views. Animated with Framer Motion and styled with shadcn/ui for a polished experience.",
+    about:
+      "A personal productivity app built to go beyond a basic todo list. It supports subtasks, priority levels, due dates, and groups tasks by date for a cleaner overview. Built with React, shadcn/ui, and Framer Motion, with a heavy focus on animations and a polished user experience.",
+    features: [
+      "Create, edit, and delete tasks with subtask support and completion tracking",
+      "Priority levels (High, Medium, Low) with visual indicators",
+      "Due date picker with date-grouped task views",
+      "Filter by All, Pending, and Completed — sort by status, priority, or date",
+      "Smooth Framer Motion animations on task add, complete, and delete",
+      "Dark and light theme toggle with persistent preference",
+      "Data persisted via localStorage — survives page refresh",
+    ],
+    techStack: [
+      projectTech.react,
+      projectTech.javascript,
+      projectTech.tailwindcss,
+      projectTech.vite,
+      projectTech.motion,
+      projectTech.shadcnui,
+    ],
+    liveLink: "https://supertodo-v1.netlify.app/",
+    githubLink: "https://github.com/CharanMunur/supertodo",
   },
 ];
 

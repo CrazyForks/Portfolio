@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import ComingSoonCard from "./ComingSoonCard";
+import ComingSoonCardWide from "./ComingSoonCardWide";
 
 const ProjectSection = () => {
+  const isEven = projects.length % 2 === 0;
+
   return (
     <section id="projects" className="w-full space-y-6">
       <div className="flex gap-3">
@@ -18,7 +21,7 @@ const ProjectSection = () => {
           <ProjectCard key={project.name} {...project} />
         ))}
 
-        <ComingSoonCard />
+        {isEven ? <ComingSoonCardWide /> : <ComingSoonCard />}
       </div>
       <div className="flex justify-center pt-6">
         <Button asChild size="lg" className="text-base">

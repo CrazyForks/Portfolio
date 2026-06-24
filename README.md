@@ -77,31 +77,63 @@ The visitor API:
 - accepts `POST` requests with `{ visitor_id }`
 - inserts the visitor into Supabase with duplicate protection
 - reads the total visitor count from Supabase
-- returns the visitor’s ordinal position plus the total count
+- returns the visitor's ordinal position plus the total count
 
 If Supabase env vars are missing or the API fails, the UI falls back gracefully and keeps the footer quiet.
 
 ## Local Development
 
+The Vite dev server proxies `/api/*` to `http://localhost:3000`, which is where the Vercel serverless runtime runs. You need **two terminals** to have the visitor counter working locally.
+
+### Prerequisites
+
+- [Bun](https://bun.sh)
+- [Vercel CLI](https://vercel.com/docs/cli) — install globally once:
+  ```bash
+  npm i -g vercel
+  ```
+
+### Setup
+
 1. Install dependencies:
    ```bash
    bun install
    ```
-2. Start the dev server:
-   ```bash
-   bun run dev
+
+2. Create a `.env` file in the project root with your Supabase credentials:
+   ```env
+   SUPABASE_URL=https://<your-project-ref>.supabase.co
+   SUPABASE_SERVICE_ROLE_KEY=<your-service-role-key>
    ```
-3. Build for production:
-   ```bash
-   bun run build
-   ```
+
+### Running locally
+
+**Terminal 1 — Vite frontend:**
+```bash
+bun run dev
+```
+
+**Terminal 2 — Vercel serverless API (visitor counter):**
+```bash
+vercel dev --listen 3000
+```
+
+> The Vite config proxies `/api` → `http://localhost:3000`, so both servers must be running for the visitor counter to work. If the API is not running, the footer counter silently stays hidden — everything else works fine.
+
+### Build for production
+
+```bash
+bun run build
+```
 
 ## Environment Variables
 
-The visitor endpoint expects:
+The visitor endpoint reads these at runtime (set them in `.env` locally, and in the Vercel project dashboard for production):
 
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
+| Variable | Description |
+|---|---|
+| `SUPABASE_URL` | Your Supabase project URL |
+| `SUPABASE_SERVICE_ROLE_KEY` | Supabase service role key (server-side only) |
 
 ## Project Structure
 
@@ -114,6 +146,5 @@ The visitor endpoint expects:
 
 ## Notes
 
-- The app currently uses Vite rewrites so `/api/*` goes to the serverless handler and all other routes fall back to `index.html`.
 - Most of the main page content is data-driven, so updating `src/data/*` changes the public portfolio content without touching layout code.
-
+- The `SUPABASE_SERVICE_ROLE_KEY` has full DB access — never expose it client-side. It is only used inside `api/visitors.ts` which runs server-side.

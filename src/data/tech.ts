@@ -11,6 +11,7 @@ export const skills: TechItem[] = [
   { name: "Tailwind CSS", icon: "/tech/tailwindcss.svg" },
   { name: "Spring Boot", icon: "/tech/springboot.svg" },
   { name: "Supabase", icon: "/tech/supabase.svg" },
+  { name: "Redis", icon: "/tech/redis.svg" },
 ];
 
 export const frontendSkills: TechItem[] = [
@@ -38,6 +39,7 @@ export const backendSkills: TechItem[] = [
   { name: "MySQL", icon: "/tech/mysql.svg" },
   { name: "Supabase", icon: "/tech/supabase.svg" },
   { name: "PostgreSQL", icon: "/tech/postgre.svg" },
+  { name: "Redis", icon: "/tech/redis.svg" },
 ];
 
 export const toolsSkills: TechItem[] = [
@@ -56,6 +58,7 @@ export const toolsSkills: TechItem[] = [
     icon: "/tech/bun.svg",
     darkIcon: "/tech/bun-dark.svg",
   },
+  { name: "Docker", icon: "/tech/docker.svg" },
   { name: "NPM", icon: "/tech/npm.svg" },
 ];
 
@@ -84,6 +87,7 @@ export const projectTech = {
   tailwindcss: { name: "Tailwind CSS", icon: "/tech/tailwindcss.svg" },
   vite: { name: "Vite", icon: "/tech/vite.svg" },
   motion: { name: "Framer Motion", icon: "/tech/motion.svg" },
+  springboot: { name: "Spring Boot", icon: "/tech/springboot.svg" },
   radixui: {
     name: "Radix UI",
     icon: "/tech/radixui.svg",
@@ -95,6 +99,13 @@ export const projectTech = {
     darkIcon: "/tech/shadcn-ui-dark.svg",
   },
   supabase: { name: "Supabase", icon: "/tech/supabase.svg" },
+  postgresql: { name: "PostgreSQL", icon: "/tech/postgre.svg" },
+  redis: { name: "Redis", icon: "/tech/redis.svg" },
+  jwt: {
+    name: "JWT",
+    icon: "/tech/jwt-light.svg",
+    darkIcon: "/tech/jwt-dark.svg",
+  },
   monaco: { name: "Monaco Editor", icon: "/tech/monaco.svg" },
   nodejs: {
     name: "Node.js",
@@ -116,4 +127,5 @@ export const projectTech = {
     icon: "/tech/execa-light.svg",
     darkIcon: "/tech/execa-dark.svg",
   },
+  docker: { name: "Docker", icon: "/tech/docker.svg" },
 } as const;
