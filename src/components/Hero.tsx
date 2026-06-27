@@ -24,11 +24,12 @@ const Hero = () => {
           variants={itemVariants}
           className="flex items-center mb-8 gap-[14px] sm:gap-[20px]"
         >
-          <div className="flex shrink-0 items-center justify-center">
+          <div className="flex shrink-0 items-center justify-center [will-change:transform,opacity] transform-gpu">
             {/* avatar */}
             <img
               src={`${import.meta.env.BASE_URL}assets/musashi.svg`}
               alt="profile"
+              decoding="async"
               className="block h-35 w-35 shrink-0 rounded-full border-2 border-border object-cover object-center p-1 shadow-sm sm:h-40 sm:w-40"
             />
           </div>
