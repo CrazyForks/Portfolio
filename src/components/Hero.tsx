@@ -24,7 +24,7 @@ const Hero = () => {
           variants={itemVariants}
           className="flex items-center mb-8 gap-[14px] sm:gap-[20px]"
         >
-          <div className="flex shrink-0 items-center justify-center [will-change:transform,opacity] transform-gpu">
+          <div className="flex shrink-0 items-center justify-center will-change-[transform,opacity] transform-gpu">
             {/* avatar */}
             <img
               src={`${import.meta.env.BASE_URL}assets/musashi.svg`}
