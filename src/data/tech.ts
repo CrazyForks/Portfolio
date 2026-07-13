@@ -81,6 +81,7 @@ export const skillRows: { direction: "left" | "right"; category: string; items: 
 ];
 
 export const projectTech = {
+  rust: { name: "Rust", icon: "/tech/rust.svg" },
   react: { name: "React", icon: "/tech/react.svg" },
   javascript: { name: "JavaScript", icon: "/tech/js.svg" },
   typescript: { name: "TypeScript", icon: "/tech/typescript.svg" },
@@ -98,6 +99,9 @@ export const projectTech = {
     icon: "/tech/shadcn-ui-light.svg",
     darkIcon: "/tech/shadcn-ui-dark.svg",
   },
+  gtk4: { name: "GTK4", icon: "/tech/gtk4.svg" },
+  libadwaita: { name: "libadwaita", icon: "/tech/libadwaita.svg" },
+  sqlite: { name: "SQLite", icon: "/tech/sqlite.svg" },
   supabase: { name: "Supabase", icon: "/tech/supabase.svg" },
   postgresql: { name: "PostgreSQL", icon: "/tech/postgre.svg" },
   redis: { name: "Redis", icon: "/tech/redis.svg" },

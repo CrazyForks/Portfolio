@@ -46,6 +46,32 @@ export const projects: Project[] = [
     githubLink: "https://github.com/CharanMunur/shrtn",
   },
   {
+    name: "Clippy",
+    imgSrc: "/projects/clippy.png",
+    description:
+      "A native clipboard manager for GNOME/Ubuntu. Captures text and image history, lets you pin, search, and drag entries straight into other apps - built to feel like it belongs on the desktop.",
+    about:
+      "Built after switching from Windows and missing its clipboard history tool. Could not find a Linux equivalent with a clean UI that did not need heavy configuration, so I built one myself in Rust with GTK4 and libadwaita. It follows the system's light/dark theme and accent color automatically, stores everything locally with no cloud or telemetry, and runs quietly in the background until summoned with a global shortcut.",
+    features: [
+      "Automatic clipboard history for both text and images, stored locally in SQLite",
+      "Pin entries to keep them at the top - survives Clear All",
+      "Live search across clipboard history as you type",
+      "Click any entry to copy it instantly, or drag it directly into another app",
+      "Configurable global keyboard shortcut to toggle the window",
+      "Native GNOME look - follows system light/dark theme and accent color via libadwaita",
+      "Packaged as both .deb and .rpm for Debian/Ubuntu and Fedora-based distros",
+      "No cloud sync, no telemetry - everything stays on the machine",
+    ],
+    techStack: [
+      projectTech.rust,
+      projectTech.gtk4,
+      projectTech.libadwaita,
+      projectTech.sqlite,
+    ],
+    liveLink: "https://github.com/CharanMunur/Clippy/releases",
+    githubLink: "https://github.com/CharanMunur/clippy",
+  },
+  {
     name: "Markdown Editor",
     imgSrc: "/projects/markdowneditor.png",
     description:
