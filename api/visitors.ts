@@ -8,16 +8,17 @@ const headers = {
 };
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method === "POST") {
+  if (req.method === "GET" || req.method === "POST") {
     try {
       if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY) {
         console.error("visitors api error: missing Supabase configuration");
         return res.status(200).json({ count: null, total: null });
       }
 
-      const { visitor_id } = req.body;
+      const visitorId =
+        req.method === "POST" ? req.body?.visitor_id : req.query?.visitor_id;
 
-      if (!visitor_id) {
+      if (req.method === "POST" && !visitorId) {
         return res.status(200).json({ count: null, total: null });
       }
 
@@ -27,20 +28,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         apiKey: SUPABASE_SERVICE_ROLE_KEY,
       };
 
-      const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/visitors`, {
-        method: "POST",
-        headers: {
-          ...authHeaders,
-          Prefer: "resolution=ignore-duplicates",
-        },
-        body: JSON.stringify({ visitor_id }),
-      });
+      if (req.method === "POST") {
+        const insertRes = await fetch(`${SUPABASE_URL}/rest/v1/visitors`, {
+          method: "POST",
+          headers: {
+            ...authHeaders,
+            Prefer: "resolution=ignore-duplicates",
+          },
+          body: JSON.stringify({ visitor_id: visitorId }),
+        });
 
-      if (!insertRes.ok && insertRes.status !== 409) {
-        console.error(
-          "visitors api error: failed to record visitor",
-          await insertRes.text(),
-        );
+        if (!insertRes.ok && insertRes.status !== 409) {
+          console.error(
+            "visitors api error: failed to record visitor",
+            await insertRes.text(),
+          );
+        }
       }
 
       const countRes = await fetch(
@@ -64,6 +67,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       const countHeader = countRes.headers.get("content-range");
       const total = Number(countHeader?.split("/")[1] ?? 0);
 
+      if (!visitorId) {
+        return res.status(200).json({ count: null, total });
+      }
+
       const orderedVisitorsRes = await fetch(
         `${SUPABASE_URL}/rest/v1/visitors?select=visitor_id,created_at&order=created_at.asc&order=id.asc`,
         {
@@ -83,7 +90,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         visitor_id?: string;
       }>;
       const count = orderedVisitors.findIndex(
-        (row) => row.visitor_id === visitor_id,
+        (row) => row.visitor_id === visitorId,
       );
 
       return res.status(200).json({

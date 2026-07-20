@@ -9,30 +9,33 @@ const VisitorCount = () => {
   const [shouldTrack] = useState(
     () => localStorage.getItem("visited") !== "true",
   );
-  const [loading, setLoading] = useState(shouldTrack);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let active = true;
 
-    if (!shouldTrack) {
-      return;
-    }
-
     const track = async () => {
       const visitor_id = getFingerprint();
+      const method = shouldTrack ? "POST" : "GET";
+      const url =
+        method === "POST"
+          ? "/api/visitors"
+          : `/api/visitors?visitor_id=${encodeURIComponent(visitor_id)}`;
 
       try {
-        const res = await fetch("/api/visitors", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ visitor_id }),
+        const res = await fetch(url, {
+          method,
+          headers:
+            method === "POST" ? { "Content-Type": "application/json" } : undefined,
+          body:
+            method === "POST"
+              ? JSON.stringify({ visitor_id })
+              : undefined,
         });
 
         if (!res.ok) {
           return;
         }
-
-        markVisited();
 
         const data = (await res.json()) as { count?: number; total?: number };
         if (active && typeof data.count === "number") {
@@ -40,6 +43,10 @@ const VisitorCount = () => {
         }
         if (active && typeof data.total === "number") {
           setTotal(data.total);
+        }
+
+        if (shouldTrack) {
+          markVisited();
         }
       } catch {
         // Keep the footer quiet if the API is unavailable.
